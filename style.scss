@@ -1,0 +1,1479 @@
+  
+  
+  /* 小卉練習 */ 
+
+ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    outline: none; 
+     /*text-align: center; ????*/ 
+    font-family:"Noto Sans cJK TC", "sans-serif" ;   
+
+    
+   } 
+
+ /*--------------------通用設定--------------------*/
+  :root {   
+    ---list-BG: #919191;
+
+    --list-border: #C1C1C1;
+    --list-color: #5B5B5B; 
+    --list-color-hover:#fff; 
+    --list-BGcolor-hover:#000; 
+
+    --product-links:#3B3B3B; 
+    --product-BGlinks:#F1F1F1;  
+ 
+    --primary-productw:#0A1013;
+    
+      /*改成跟FIGMA一樣*/  
+      ---primary-900:#000; 
+      ---primary-800:#1E1E1E; 
+      ---primary-700:#3B3B3B; 
+      ---primary-600:#5B5B5B;
+      ---primary-500:#919191; 
+      ---primary-400:#C1C1C1; 
+      ---primary-300:#E9E9E9; 
+      ---primary-200:#F1F1F1; 
+      ---primary-100:#FAFAFA; 
+      ---primary-50:#FFFFFF;  
+      ---primary-50-5:rgba(255, 255, 255, 0.4); 
+}  
+    h1{font-size:40px;}
+    h2{font-size:32px;}
+    h3{font-size:28px;}
+    h4{font-size:24px;}
+    h5{font-size:20px;}
+    h6{font-size:16px;}  
+
+    .fs-1{font-size:40px}
+    .fs-2{font-size:32px}
+    .fs-3{font-size:28px}
+    .fs-4{font-size:24px}
+    .fs-5{font-size:20px}
+    .fs-6{font-size:16px} 
+
+    @media(max-width:768px){ 
+      h1{font-size:48px;}
+      h2{font-size:38.4px;} 
+      h3{font-size:33.6px;} 
+      h4{font-size:28.8px;} 
+      h5{font-size:24px ;}
+      h6{font-size:19.2 px ;}  /*跟瀏覽器預設一樣*/
+
+      .fs-1{font-size:60px}
+      .fs-2{font-size:48px}
+      .fs-3{font-size:42px}
+      .fs-4{font-size:36px}
+      .fs-5{font-size:30px}
+      .fs-6{font-size:24px}  /*text-align: center; ????*/
+     }  
+ 
+    /*-SCSS - Sass 變數常用語法一鍵設定章節學到ㄉ-*/  
+
+
+     $font-family-base: Tourney, sans-serif;
+     $transform: scale(1.1); 
+     $font-family-servetitle: "Tourney"; 
+     $font-family-servetitle: "Tourney";  
+     $hover-big:scale(1.1); 
+     $transition-smooth:all .3s ease-in-out; 
+     $transition-delay: .15s;
+/*--------------------END通用設定--------------------*/  
+ 
+
+/*--------------------通用ㄉ元件設定--------------------*/ 
+
+ .container{ 
+  /*max-width: 1296px; */
+    margin: 0 auto;/*重要 加了才會自動置中*/ 
+    padding: 120px 36px;
+  }  
+  @media(max-width:768px){ 
+    .container{ 
+       padding: 120px 0 ;
+      margin: 0 12px;
+    }
+  } 
+
+  
+  .link {
+    padding: 4px 12px;
+    border-radius: 16px;
+    background-color: var(--product-BGlinks);
+    color: var(--product-links); 
+  } 
+  .title{ 
+   /*老師求解 我一開始設 display: inline-block; 會無法置中，為甚麼壓QQ*/
+    text-align: center;
+   margin: 0 auto; 
+  } 
+ 
+  .title::after,.title::before{  
+    content: " ";   
+    display: inline-block; 
+    position: relative; 
+    width: 100px;  
+    height: 6px;  
+    top: -12px;
+    
+    background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/title-deco-left-lg.png?raw=true");
+  }  
+  .title::before{  
+    right: 16px;
+  }
+  .title::after{ 
+    rotate:(-180deg); 
+    left: 16px;
+  }  
+
+  .under-word{ 
+    position: relative; 
+    display: inline-block; 
+  }   
+ 
+  .under-word::before{  
+    content: " ";
+    position: absolute;
+    width: 200px;
+    height: 20px;
+    bottom: -12px;
+    left: -10px;  
+background-size: 128px auto; 
+
+    /*  background-image: url(images/YELLOW.png);  */ 
+    background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/mark.png?raw=true");    
+    background-repeat:no-repeat; 
+   /* background-position: 0% 90%;(用這個定位的話 設負值時會不超出邊界) */ 
+    z-index: -1;
+  }
+
+/*--------------------END通用ㄉ元件設定--------------------*/ 
+
+     
+/*--------------------頁面--------------------*/
+  
+  header{ 
+    display: flex; 
+    justify-content: center;  
+    align-items: center;   
+    height: auto;
+    position: relative;   
+    /* border-bottom: 1px solid ;  */
+    font-size: 16px;    
+    height: 96px; 
+    background-color: #fff; 
+    border-bottom: 0.5px solid #ababab;
+    position: sticky;
+    top: 0; 
+    z-index: 10;
+    .nav-list{  
+        display: flex; 
+        justify-content: space-between;  
+        flex-wrap: nowrap;  
+        padding: 32px 0;   
+        
+        li{ 
+          margin: 0 40px 0 0;
+          text-align: center; 
+          padding: 4px 8px; 
+           /*border: 1px dashed black; 無法調整間隙  */  
+           position: relative;  
+           a{ 
+            color: var(---primary-900);
+           }
+           .nav-list-line{ 
+            position: absolute;
+            width: 8px; 
+            height: 8px;  
+            
+         }
+           
+      ;
+          
+        }  
+        li:hover{    
+           /*參考頁面   */
+          /* https://css-tricks.com/more-control-over-css-borders-with-background-image/  */ 
+          /*缺點 如果是長方形 無法維持所有線條依樣長   */
+         /*  background-position:  0 0, 0 0, 100% 0, 0 100%;
+           background-size: 1px 100%, 100% 1px, 1px 100% , 100% 1px;
+           background-repeat: no-repeat;
+          background-image:
+          linear-gradient(0deg, var(---list-BG), var(---list-BG) 25%, transparent 25%, transparent 75%, var(---list-BG) 75%), // left
+          linear-gradient(90deg, var(---list-BG), var(---list-BG) 25%, transparent 25%, transparent 75%, var(---list-BG) 75%), // top
+          linear-gradient(180deg, var(---list-BG), var(---list-BG) 25%, transparent 25%, transparent 75%, var(---list-BG) 75%), // right
+          linear-gradient(270deg, var(---list-BG), var(---list-BG) 25%, transparent 25%, transparent 75%, var(---list-BG) 75%) // bottom */ 
+          .nav-list-line:nth-child(1){  
+            
+            top: 0;  
+            left: 0;
+            border-top:  1px solid  var(--list-color); 
+            border-left:1px solid   var(--list-color);
+           } 
+           .nav-list-line:nth-child(2){  
+            
+            top: 0;  
+            right: 0;
+            border-top:  1px solid  var(--list-color); 
+            border-right:1px solid   var(--list-color);
+           } 
+           .nav-list-line:nth-child(3){  
+            right: 0; 
+            bottom: 0;
+            border-bottom:  1px solid  var(--list-color); 
+            border-right:1px solid   var(--list-color);
+           } 
+           .nav-list-line:nth-child(4){  
+            
+            left: 0; 
+            bottom: 0;
+            border-bottom:  1px solid  var(--list-color); 
+            border-left:1px solid   var(--list-color);
+           } 
+           .nav-list-line:nth-child(5){  
+            
+            top: 0;  
+            left: 0;
+            border-top:  1px solid  var(--list-color); 
+            border-left:1px solid   var(--list-color);
+           }
+         
+        }  
+        li.active{    
+          /*參考頁面   */
+         /* https://css-tricks.com/more-control-over-css-borders-with-background-image/  */ 
+         
+         .nav-list-line:nth-child(2){  
+          
+          top: 0;  
+          right: 0;
+          border-top:  1px solid  var(---primary-500); 
+          border-right:1px solid  var(---primary-500); 
+         } 
+         .nav-list-line:nth-child(3){  
+          right: 0; 
+          bottom: 0;
+          border-bottom:1px solid  var(---primary-500); 
+          border-right:1px solid   var(---primary-500); 
+         } 
+         .nav-list-line:nth-child(4){  
+          
+          left: 0; 
+          bottom: 0;
+          border-bottom:1px solid var(---primary-500); 
+          border-left:1px solid   var(---primary-500); 
+         } 
+         .nav-list-line:nth-child(5){  
+          
+          top: 0;  
+          left: 0;
+          border-top:  1px solid  var(---primary-500); 
+          border-left:1px solid  var(---primary-500); 
+         }
+       
+         
+       } 
+    
+      }   
+      .nav-list li::after{   
+         /*  content: " "; */ 
+          /*  border-left: 1px solid #222 ; 
+          border-bottom: 1px solid #222 ; ;  */ 
+          /*border:12px dashed #222 ; */    
+          display: flex;
+          height: inherit; 
+          width: inherit; 
+          
+       }
+      .logo{ 
+        position: absolute;  
+        transform: translate(-50%,-50%); 
+        
+          
+        left:10%; 
+        top: 50%; 
+        img{ 
+          height: 25px; 
+          width: 76px;
+        }
+      }   
+      .menu-button{  
+        display: flex; 
+        flex-direction: column;
+         justify-content:space-between; 
+        height: 20px;  
+
+        position: absolute;  
+        transform: translate(-50%,-50%);
+        right:10%; 
+        top: 50%; 
+         
+        visibility: hidden;
+        .menu-button-line{ 
+         height: 2.5px; 
+         width: 30px;  
+         background-color: black; 
+         border-radius: 2px;
+        }
+      } 
+
+
+       /* 切換至手機時 */
+    @media(max-width:768px){ 
+        flex-direction: column;   /* header改瀑布流式垂直 */ 
+        text-align: center;     /* 不知道為何對logo起不了做用 */ 
+        height: 56px;  
+
+        .nav-list{  
+         /*  visibility:visible  ;*/ 
+          /*   visibility:hidden;  ;*/    
+          display: none;
+          margin-top: 56px;
+          transform: translate(0%, 50%);
+          flex-direction: column;   
+          gap: 24px;
+          align-items: center;
+          background-color: #fff;
+          border-top: 0.5px  #ababab; 
+          border-bottom: 0.5px solid #ababab;
+          width: 100%; 
+          z-index: 10;
+            li{ 
+               padding:4px 8px ;  
+              margin: auto 0; 
+              max-width:fit-content;/* 讓他符合子元素大小，不然他的寬度會滿版 ;*/ 
+              }   
+            
+        }
+        
+        .logo{  
+            /*position:static;  設靜態但缺點是這樣會align-items: center;起不了作用，所以已margin: 16px 0; 取代height:56px  */ 
+            img{ 
+              height: 20px; 
+              width: 64px;
+            }
+            
+          } 
+          /*   
+          .logo::after{ 
+            content: " ";  
+           /* display: flex; display: inline-block;?????為甚麼會影響到上層的LOGO*/
+          /* display: flex; 
+            height: 0.5px;
+            width: 100vw; 
+            background-color:black ;
+          }  */
+         /* 一般模式 */ 
+
+        .menu-button{   
+          visibility: visible;  
+          right: 18px;
+           
+        }  
+
+     
+        /* JS設定開啟選單欄位 */  
+        .active.menu-button+.nav-list{
+          visibility: visible; 
+            display: flex; 
+            
+        }
+       
+        .active.menu-button{  
+          transform: translate(50%,0%);   
+          right: 60px;
+          .menu-button-line{  
+            position: absolute; 
+            
+          } 
+          .menu-button-line:nth-child(1){  
+           /*  
+           transform-origin: top left;
+           rotate:45deg ; */ 
+           rotate:45deg ;  
+          }  
+          .menu-button-line:nth-child(3){ 
+           /*  
+           transform-origin: bottom left;
+           rotate:-45deg ;*/ 
+           rotate:-45deg
+          }  
+          .menu-button-line:nth-child(2){ 
+            visibility: hidden; 
+           
+          }
+        }  
+         
+        .active.menu-button~.bg{  
+           background: rgba(0, 0, 0, 0.7); 
+           width: 100%; 
+           height: 100%; 
+           position: absolute; 
+           top: 56px;
+           z-index: 1;
+           height: 100VH;
+         } 
+       
+         
+    } 
+    
+  }   
+
+  /* 
+  } ;*/ 
+  .page-profolio{  
+    .products{ 
+      display: flex; 
+      gap: 0 24px ;
+      align-items: center;  
+      flex-wrap: wrap; 
+      
+      .product-pag{  
+        display: flex; 
+        margin:0 auto; 
+        gap:0 12px; 
+        display: flex; 
+        align-items: center; 
+        align-self: center;
+        li{   
+            
+           width: 40px; 
+          height: 40px; 
+          margin-bottom: 85px;
+           /*  padding: 5px 13px; */ 
+         /*  padding:13px 13px; */ 
+          text-align: center;
+          border-radius: 4px; 
+    
+        } 
+        li:hover,li.active{  
+          color: #fff;
+          background-color: #000;
+        } 
+        
+      }
+     
+      .product{   
+        display: flex; 
+        flex-direction: column;
+        width: calc(50% - 12px);  
+        margin-bottom: 80px;    
+        
+        
+        .product-img{ 
+          max-width: inherit;
+        }
+        .product-img img{  
+          max-width: inherit;
+        border-radius: 8px; 
+        max-width: 100%;
+       /*如果我要border-radius: 8px;直接設在product-img上的話  img要加vertical-align: middle; 不然會有空間差*/ 
+        }  
+        .product-content{  
+          padding: 16px 16px 0 16px; 
+          
+          h2{ 
+            margin-bottom: 8px;
+          } 
+          p{ 
+            color: var(---list-BG);
+          }
+          .product-content-links{   
+            margin-top: 24px;
+            .product-link{ 
+              padding: 4px 12px; 
+              border-radius: 16px; 
+              background-color:var(--product-BGlinks) ; 
+              color:var(--product-links);   
+    
+             
+            }
+          }
+        }
+          
+        
+       
+      }   
+       
+      :nth-child(5){ 
+        margin-bottom: 72px;  
+      }
+      :nth-child(6){ 
+        margin-bottom: 72px;  
+      }
+     
+    
+      } 
+    
+    .banner{ 
+        padding: 80px 0;  
+        text-align: center; 
+        background-color: var(---primary-100);
+        .banner-top{   
+          position: relative; 
+          height: 192px;
+          max-width: 670px;
+          display: flex;
+          justify-content: center;
+          align-items: center; 
+          margin: 0 auto;  
+          color: var(---primary-800); 
+          z-index: 2;
+          .banner-top-icon{ 
+            position: absolute; 
+            width: 72px;
+            height: 72px;
+          }
+          .icon-one{  
+           
+            left: 0px;
+            top: 0px;
+            }   
+            .icon-two{ 
+             
+            right: 0;
+            bottom: 0px;
+    
+            }
+     
+         
+    
+          
+        } 
+         
+        .banner-down{
+           display: flex;
+           align-items: center;   
+           margin: 0 auto;
+          justify-content: center; 
+          max-width: 636px;
+          margin-top: 24px;
+          gap: 40px; 
+    
+          color: var(---primary-700); 
+          .down-area-title{ 
+            color: var(---primary-600);   
+            
+          }  
+          .down-area-line{ 
+            display: inline-block; 
+            background-color: var(---primary-400);
+            width: 24px; 
+            height: 2px;  
+            margin-top: 0;
+            margin-bottom: 8px;
+          }
+        }
+    }  
+    @media(max-width:768px){ 
+      .products{ 
+        .product{ 
+          width: 100vw;  
+          .product-img img { 
+            border-radius: 0px;
+          }
+        } 
+      }   
+      .banner{   
+        width: 100vw;  
+        padding: 40px 37.5px 80px 37.5px; 
+        overflow-x: hidden;/* overflow-x: hidden */
+        .banner-top{  
+          width: 300px;  
+          height: auto;
+          text-wrap: wrap; 
+          word-wrap:break-word; 
+          white-space:pre-wrap; 
+          flex-direction: column; 
+          .banner-top-icon{ 
+            position:static; 
+            width: 72px;
+            height: 72px;  
+            display: flex;/* 不然SVG會跑出去 */
+            padding: 13.33px;
+          }
+    
+          h4{ 
+            font-size: 20px; 
+            span:nth-child(2){ 
+              bottom: -12px;
+              right: -10px; 
+            }
+          }
+        }
+        .banner-down{   
+          margin-top: 40px;
+          padding: 0 70px;
+          flex-direction: column;
+        }
+      } 
+      
+    } 
+    
+  }
+ 
+
+  footer{
+    display: flex;
+     justify-content: space-between;   
+    padding:40px 80px;  
+    gap: 40px 0;
+    flex-wrap: wrap; 
+    align-items: center;  
+    margin-bottom: 120px; 
+    background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/footer-bg-lg.png?raw=true");
+    .footer-about{  
+      display: flex;   
+      flex-direction: column;
+      gap: 24px;
+      .footer-about-logo{ 
+        padding: 10px; 
+        img{ 
+          width: 101px; 
+          height: 34px;
+        }
+       
+      }
+
+    }
+    .footer-form{ 
+       display: flex; 
+       flex-direction: column;  
+       
+      
+      .footer-form-list{ 
+       display: flex;  
+       align-items: center;  
+       width: 306px; 
+       padding:8px 24px ;     
+       border: 1px var(--list-border) solid;  
+       color:var(--list-color);
+       border-radius: 8px;
+      
+      
+    /* margin-top: 24px;   */
+      
+       .icon{ 
+        height: 56px; 
+        width: 56px;  
+        display: flex;
+        align-items: center; 
+        
+       }    
+      } 
+      .footer-form-list:hover{ 
+        background-color:var(--list-BGcolor-hover);
+        color:var(--list-color-hover);
+        .icon{ 
+          svg{  
+            
+            color: #fff; /* HTML的fill改為="currentColor"後 才可用color改顏色*/ 
+          /*  stroke: #fff; /*無法使用在SVG的線段 */ 
+          }
+        }
+      }
+       
+      .footer-form-list:nth-child(2){ 
+        margin-top: 0px; 
+        margin-top: 24px;  
+       }   
+       .footer-form-list:nth-child(3){ 
+        margin-top: 24px;  
+       } 
+       
+    }
+  }
+ 
+/* banner、products切換至手機時 */
+ 
+
+@media(max-width:768px){ 
+  footer{ 
+    background-size:100vw; 
+    background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/footer-bg-sm.png?raw=true");
+  } 
+ }
+  .other{  
+    width: 100%; 
+    height: 100%;  /*失效????*/
+    height: 100vh;
+background-color: black;
+  }
+ 
+  
+
+/* 共用元件 */
+.services{  
+  text-align: center; 
+  
+  .service-items{   
+    margin-top: 80px;  
+    width: 100%;
+    display: flex; 
+    gap: 24px;  
+    align-items: center; 
+    flex-wrap: wrap;
+    li{  
+      flex: 1 1 calc(25% - 24px); 
+      min-width:  306px;
+      /*  width: 306px;
+      height: 306px; */
+      border-radius: 16px;
+      background: linear-gradient(315deg, #1E1E1E 0%, #1E1E1E 49.97%, #000000 50%);
+      
+      a{  
+      margin: 80px auto; ;
+        text-align: center; /*為何無效  */
+        display: flex;  
+        gap: 34px; 
+        flex-direction: column; 
+        align-items: center; 
+        /*此時無法用 justify-content: center;  align-content: center;  */
+        color: var(---primary-50); 
+        .service-icon{ 
+          width: 60px; 
+          height: 60px; 
+           text-align: center;
+          svg{ 
+            width: inherit;
+            height: inherit;
+          }
+        } 
+      }
+      
+
+    } 
+  }  
+  @media(max-width:768px){ 
+    .service-items{ 
+      flex-direction: column; 
+      li{  
+        flex: 1 1 100%;/*為甚麼會失效?? */
+       }
+    }
+  }
+  
+} 
+/* 共用元件 */ 
+
+.page-index{
+  .title{ 
+    padding-bottom: 80px;
+  }    
+  .page-index-btn{  
+    display: inline-block; 
+    margin: 40px auto 0 auto;
+    padding: 16px 64px 16px 32px; 
+    border-radius: 5px; 
+    background-color: var(---primary-900); 
+    color: var(---primary-50);
+  } 
+
+  .banner{   
+     
+    display: flex; 
+    flex-direction: row; 
+    width: 100%;
+    .banner-left{    
+    position: relative;  
+      float: left;
+      z-index: 5;
+       margin: auto 24px auto 5%;
+      width: 41.66666666666667vw;
+      max-width: 430px;  
+     
+      .banner-title{ 
+        font-size: 40px; 
+        margin-top: 0;
+      }  
+      .banner-word{ 
+      margin-top: 24px;  
+      margin-bottom: 16px;  
+      line-height: 1.5;
+      }
+      .banner-left-icons{  
+      margin-top: 60px;
+        display: flex; 
+        gap: 16px;  
+        width: 200px;
+        li{ 
+          width: 56px; 
+          height: 56px; 
+          display: flex;
+          
+          svg{ 
+            margin: auto auto; 
+          }
+        }
+      }
+    } 
+    .banner-img{ 
+      position: relative;
+      right: 0; 
+      /*   background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/hero-lg.png?raw=true"); */
+      width:calc(100% - 430px);  
+       img{  
+       width: 100%;
+      /*  width: inherit; 會變成繼承這個width:calc(100% - 430px); */
+       height: auto; 
+       } 
+       .banner-img-sm{ 
+        display: none;
+       }
+    } 
+    
+  }  
+  @media(max-width:1000px){
+    .banner{ 
+      flex-direction: column-reverse;  
+      .banner-img{  
+      width: 100%;
+          
+        .banner-img-lg{ 
+          display: none;
+         }
+        .banner-img-sm{ 
+          display: block;
+         }
+      } 
+      .banner-left{ 
+        width: 100%; 
+        padding:0 53px; 
+        text-align: center; 
+        .banner-left-icons{ 
+          justify-content: center; 
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .products{   
+    padding-top: 120px;  
+    
+    .product{  
+      padding: 0 55px; 
+      margin: 0 auto;
+      width: 100%; 
+      height: 800px;
+      max-height: 800px; /*   min-height 為甚麼用min-height: 800px; before的h100會吃不到?? */ 
+      display: flex;
+      gap:0 55px;
+      align-items: center;  
+      
+      a{  
+        max-width: 714px;  
+        flex: 1 1 calc(50% - 55px); 
+        
+        img{
+          width: inherit; /* 無法繼承??? */ 
+          width:100%;
+          height: auto; 
+          margin-top: 80px; 
+          /*  top: 0px;  
+          position: sticky; */  
+       }
+      }
+      
+     .product-content{  
+      backdrop-filter: blur(4px); 
+      
+
+      z-index: 5;
+      width: 526px; 
+      flex: 1 1 calc(50% - 55px);   
+      color: var(---primary-100);
+      display: flex; 
+      flex-direction: column;
+      padding: 80px 40px 56px 40px;
+      border-radius: 24px; 
+      background-color: var(---primary-50-5);  
+      background: rgba(255, 255, 255, 0.1); 
+      /*position: sticky;*/
+      top: 0;
+      bottom: 0; 
+      .product-content-top{  
+        border-bottom: 1px solid var(---primary-200);
+        margin-left: 2px #bb3636  solid;
+        
+        h4{ 
+          margin-bottom: 8px;
+        } 
+        p{ 
+          margin-bottom: 24px;
+        } 
+        .product-content-links{ 
+          margin-bottom: 40px;  
+          display: flex;
+          gap:0 16px; 
+          li{ 
+            padding: 4px 12px; 
+            border-radius: 16px; 
+            background-color: var(---primary-50); 
+            color: var(---primary-700);
+          }
+        }
+      }
+  }
+      
+        
+     } 
+     .product-content::before{  
+      content: "";
+      width: inherit; 
+      height:inherit;  
+      background-color: var(---primary-900);
+     }  
+     @media(max-width:1200px){ 
+      .product{ 
+        height: auto;  
+        .product-content{  
+          width: auto;
+          height: fit-content; 
+          padding: 20px 20px 20px 20px;
+        }
+      }
+    }
+    @media(max-width:786px){ 
+      .product{ 
+        flex-direction: column;   
+        padding: 0;
+        a{ 
+            
+          margin-bottom: 0;
+          flex: 1 1 auto;
+         padding-left: 40px; 
+          padding-right:40px; 
+        }
+        .product-content{  
+           
+         flex: none;
+         width: 100%;    
+         text-align: center;
+          padding: 24px 40px 48px 40px;
+          border-radius: 0; 
+          color: var(---primary-900); 
+          border-bottom:0px ;
+          background-color: var(---primary-50); 
+          .product-content-top{ 
+            margin-bottom:0; 
+            border-bottom: 1px
+          }  
+          .product-content-top{   
+          
+            .product-content-links{ 
+              justify-content: center;
+              margin-bottom: 0; 
+              li{  
+                color: var(---primary-700);
+                background-color: var(---primary-200);  /*???;*/
+                
+              }
+            }
+          }
+          
+        } 
+        
+        
+      }
+    } 
+
+     .product-one{  
+      background-image:url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/homepage-work1-bg.png?raw=true"); 
+      a{ 
+        display: flex;
+        align-self: end;
+      }
+      
+    } 
+    .product-two{  
+      flex-direction: row-reverse;  
+      background-attachment: fixed; /* 背景固定 */ 
+       
+      background-image:url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/homepage-work2-lg.png?raw=true");
+     
+    }   
+    
+    .product-two::before{ 
+      content: "";
+      position: absolute;
+      z-index: 5;
+      width: 50%;
+      right: 50%;
+      height: inherit; 
+      min-height: 390px; 
+      background-color: var(---primary-900);
+      opacity: 0.5; 
+      
+    }   
+    @media(max-width:768px){ 
+      
+      .product-two{  
+      flex-direction: column;   
+      background-image:none; 
+      
+      a{   
+      min-height: 390px;
+      height: 50%; 
+      width: 100%; 
+      background-image:url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/homepage-work2-lg.png?raw=true");
+      }
+      } 
+      .product-two::before{ 
+      content:none; 
+      }
+      
+    }
+    
+    .product-three{  
+
+
+      background-image:linear-gradient(to right, rgb(13,12,7,0.5),rgb(13,12,7,0.5)),url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/homepage-work3-bg.png?raw=true"), 
+    ;
+   
+    }  
+     
+    }  
+  
+  .services{ 
+   
+   background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/homepage-services-bg.png?raw=true");
+   .service-words{ 
+    margin-top: 80px; 
+    }
+  } 
+  .services::after{  
+    content: " ";  
+    display: block;
+    background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/homepage-services-bg.png?raw=true");
+    width: 100%; 
+    height: 100%;
+  }
+  .articles{  
+    scroll-behavior: smooth;
+    overflow: hidden; 
+    
+    .article{  
+      transition:all 2s ease-in; 
+      /*scroll-snap-type:x mandatory; /*滾動完後對齊用 但用起來桌機上測試感覺怪怪的 但手機板卻很自然;*/
+      display: flex;  
+      gap:16px; 
+      margin-bottom: 40px; 
+      /*transition: transform 0.3s ease;  
+      scroll-behavior: smooth;  */
+      scrollbar-width: none; 
+      overflow-x: scroll; 
+      
+      /*overflow: hidden;*/
+      li{ 
+        display: flex;   
+        flex: 1 1 33.333%;  
+        scroll-snap-align:start; /*滾動完後對齊用;*/
+        
+
+        flex-direction: column;   
+        gap: 16px 0;
+        .article-title{ 
+        color: var(---primary-700);
+        }
+        .article-item{ 
+          display: flex; 
+          justify-content: space-between; 
+          .time{ 
+            color: var(---primary-600);
+          }
+        }
+      }
+    }   
+
+    .article-buttons{  
+      margin: 0 auto 120px auto;   /*失效????*/
+      display: flex;
+      width: 124px;
+      gap: 16px; 
+      
+      .article-button {  
+        display: inline-block;
+        width: 12px; 
+        height: 12px;  
+        border-radius: 50%; 
+        border: none;
+        background-color: var(---primary-300); 
+
+        
+      } 
+      .article-button.active{
+        background-color: var(---primary-900); 
+      }
+    }
+  }
+} 
+  
+
+
+.page-serve{ 
+  .serve-process{ 
+    .title{ 
+      color: var(---primary-50);
+    } 
+    padding: 120px 0;
+    display: flex; 
+    flex-direction: column;  
+    background: linear-gradient(315deg, #1E1E1E 0%, #1E1E1E 49.97%, #000000 50%);
+    .serve-items{  
+      margin: 80px auto 0 auto;
+      display:flex;  
+      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 64px;
+      .title{
+         color: invert ; 
+         
+      }
+      .serve-item{ 
+        display: flex; 
+        width: 655px;
+        position: relative; 
+        align-items: center;
+        border: var(---primary-500) 1px solid; 
+        background-color: var(---primary-700);
+        .serve-number{ 
+          margin: auto 32px; /* 不懂為何用padding會出錯 */
+          font-family: Tourney, sans-serif;
+          font-size: 72px; 
+          color: var(---primary-500) 
+        } 
+        .serve-words{  
+          color: var(---primary-50); 
+          display: flex;  
+          flex-direction: column;
+          gap: 8px; 
+          margin:auto 0; 
+          padding: 24px 0 ;
+        }  
+        .serve-arraw{  
+          svg{ 
+           margin: auto;  
+            } 
+        position: absolute;  
+        width: 32px; 
+        height: 32px;  
+        /*/border: #f8e0a2 1px solid; */
+        left: 50%;
+        bottom: -16px;
+        transform: translate(-50%, 100% ) ;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        }
+      
+      } 
+    } 
+    @media(max-width:768px){
+      .serve-items{  
+        .serve-item{ 
+          padding: 24px 24px 48px 24px; 
+          flex-direction: column;  
+          width: auto;
+          h3{
+            text-align: center;  
+          }
+        }
+
+      } 
+    }
+  }  
+   
+.prices-area{   
+    padding-top:120px ; 
+    padding-bottom: 120px;
+    .price-items{   
+      margin:80px auto 0 auto; 
+      justify-content: center;
+      display: flex; 
+      align-items: center; 
+      gap: 24px; 
+      flex-wrap: wrap;
+      .price-item{   
+        padding: 32px; 
+        align-items: center;
+        display: flex; 
+        flex: 1 1 calc(33.3333% - 24px);
+        background:var(---primary-100);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        .price-item-title{  
+
+          display: flex; 
+          gap: 5px; 
+          align-items: center;
+        .price-item-icon{   
+          width: 56px; 
+          height: 56px; 
+          display: flex; 
+          justify-content: center; 
+          align-items: center;
+        } 
+        h3{ 
+        overflow-wrap: break-word;
+         color: var(---primary-600); 
+        }
+        }  
+        .price-line{  
+          margin: auto 16px; 
+          height: 1px; 
+          min-width: 41px; 
+          background-color: var(---primary-400);
+        } 
+        .price{  
+        display: flex;
+        gap: 8px;  
+        align-items: end;
+        .h2{   
+        color: var(---primary-800);
+        } 
+        p{ 
+        color: var(---primary-600); 
+        padding-bottom: 4px;
+        }
+        }
+      }
+    }
+    
+
+  } 
+
+  .question-erea{ 
+      
+  padding: 120px 0; 
+  .question-items{  
+    
+    margin:80px 110px 0 110px;  
+    display: flex;  
+    gap: 24px;
+    flex-wrap: wrap; 
+    .question-item{ 
+      padding: 24px; 
+      gap: 16px;  
+      min-width: 335px;
+      display: flex;   
+      flex-direction: column; 
+      flex: 1 1 calc(50% - 24px);
+      border: var(---primary-300) 1px solid;
+    }
+  }
+  }  
+   @media(max-width:768px){ 
+   .question-erea{ 
+    .question-items{  
+      margin:80px auto 0 auto;  
+        }
+      }  
+    } 
+  
+  
+  
+
+}
+
+
+
+
+  
+
+.page-blog{   
+  .title-2{
+   text-align: center;  
+   margin-top: 16px;
+  } 
+
+  @media(max-width:768px){ 
+    .blog-area{ 
+     flex-direction: column-reverse;
+    }
+   } 
+
+  .blog-area{  
+    display: flex; 
+
+     
+
+    .blog-articles{ 
+      width: calc(75% - 12px); 
+      display: flex;  
+      flex-direction: column; 
+      gap: 64px;  
+       
+     
+      .blog-article{  
+        scroll-behavior: smooth;
+        overflow: hidden;
+        display: flex;   
+        gap: 16px;
+        a{   
+          border-radius: 8px; 
+          min-width:306px;  
+          min-height: 220px;  
+          flex: 1 1 33.333%; /*為甚麼小螢幕時會整個不見而不適變成高33.333%?? */
+          background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/article-image1.png?raw=true");
+          background-repeat:no-repeat;  
+          background-size: cover;
+           background-position: center center;
+           @media(max-width:768px){  
+            flex: 1 1 auto; 
+          }
+          
+        } 
+       
+        .article-content{ 
+          width: 66.666%; 
+          display: flex;  
+          flex-direction: column; 
+          gap: 16px; 
+          .article-item{   
+            display:flex;  
+            justify-content: start;
+             align-items: center;
+            .link{ 
+              display:inline;  
+              margin-left: 16px;
+            }
+
+          } 
+          @media(max-width:768px){ 
+            width: 100%;
+            
+          }
+        } 
+        @media(max-width:768px){ 
+          flex-direction: column; 
+          
+        }
+      } 
+      @media(max-width:1100px){ 
+        flex-direction: column; 
+        gap: 40px; 
+        width: 100%; 
+         text-align: center; 
+        padding: 0 22.5px;   
+        
+      
+      }
+    }
+    .blog-labels{  
+      white-space:nowrap;/*為甚麼這裡小螢幕時會斷行呀?(在我不用nowrap不換行的情況)?? */
+      width: calc(25% - 12px); 
+      padding-top: 80px; 
+      padding-left: 80px;   
+      margin-left: 24px;
+      display: flex;  
+      flex-direction: column;
+      gap: 22px;   
+      background-color: var(---primary-100); 
+      @media(max-width:768px){   
+        flex-direction:row;
+        padding:20px 0;
+        gap: 32px; 
+        overflow-x: scroll;  
+        scrollbar-width: none;
+        
+        position: relative;
+        width: calc(100% + 24px);
+        left: -12px;  
+        padding-left: 12px; 
+        margin-bottom: 40px; 
+        margin-left: 0px;
+      :nth-child(1){ 
+       /*margin-left: 12px;不懂為甚麼會變成padding left:12px;的效果*/
+      }
+      } 
+
+      .blog-label{  
+        width: fit-content;
+        padding-bottom: 4px;  
+        margin:0 20px;
+      }  
+      .blog-label.active{  
+    
+       border-bottom:1px solid var(---primary-800) ;
+      }
+      
+     
+    }
+  }  
+  
+}  
+.article-item{  /*---部落格的共用元件-----*/   
+  display:flex;  
+  justify-content: start;
+   align-items: center;
+  .link{ 
+    display:inline;  
+    margin-left: 16px;
+  }
+
+}  
+
+.page-article{  
+  .blog-area{ 
+     border-bottom: 1px solid var(---primary-200);
+    .blog-content{  
+      width: calc(75% - 12px);  
+      .article-content{
+        display: flex;  
+        flex-direction: column;
+     gap: 40px;
+        }
+      .content-title{ 
+      text-align: center; 
+      
+       }
+    } 
+    
+    
+  } 
+  .other-article{ 
+    .blog-articles{     
+    display: flex; 
+      flex-direction:row;  
+      gap: 24px;
+      .blog-article{  
+       
+       
+        width: 416px;    
+        display: flex; 
+        flex-direction: column;
+        a{   
+            border-radius: 8px; 
+            min-width:306px;  
+            min-height: 220px;  
+            flex: 1 1 33.333%; /*為甚麼小螢幕時會整個不見而不適變成高33.333%?? */
+            background-image: url("https://github.com/hexschool/2022-web-layout-training/blob/main/2024%20web-camp/article-image1.png?raw=true");
+            background-repeat:no-repeat;  
+            background-size: cover;
+             background-position: center center;
+             @media(max-width:768px){  
+              flex: 1 1 auto; 
+            } 
+          }
+        .article-content{  
+          text-align: left;
+           width: 100%; 
+          
+          .article-item{ 
+           justify-content: space-between;
+          }
+         }
+        
+      } 
+    } 
+   }
+   
+}
+
+  /* 小卉練習 */
